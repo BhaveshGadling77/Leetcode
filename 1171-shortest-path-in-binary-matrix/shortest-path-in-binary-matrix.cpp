@@ -5,8 +5,7 @@ public:
         int n = grid.size();
         if (grid[0][0] || grid[n-1][n-1])
             return -1;
-        //reason why used queue instead of priority queue.
-        //if i am using the 
+        
         vector<vector<int>>dist(n, vector<int>(n, INT_MAX));
         vector<int>dr = {-1, -1, -1, 0, 1, 1, 1, 0};
         vector<int>dc = {-1, 0, 1, 1, 1, 0, -1, -1};
@@ -28,11 +27,11 @@ public:
                 int ncol = col + dc[i];
                 //if the new row and new col is valid then check !grid[nrow][ncol] should be true 
 
-                if(nrow >= 0 && ncol >= 0 && nrow < n && ncol < n && !grid[nrow][ncol]) {
-                    if (dis + 1 < dist[nrow][ncol]) {
-                        q.push({dis +1, nrow, ncol});
-                        dist[nrow][ncol] = dis + 1;
-                    }
+                if(nrow >= 0 && ncol >= 0 && nrow < n && ncol < n &&
+                    !grid[nrow][ncol] && dis + 1 < dist[nrow][ncol]) {
+                
+                    q.push({dis +1, nrow, ncol});
+                    dist[nrow][ncol] = dis + 1;
                 }
                 if (dist[n-1][n-1] != INT_MAX)
                     return dist[n-1][n-1];
