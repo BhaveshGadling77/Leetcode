@@ -35,20 +35,32 @@ public:
         // }
 
         //space optimization.
-        vector<int>after(n + 1, 0);
-        vector<int>curr(n + 1, 0);
-        for (int indx = n-1; indx >= 0; indx--) {
-            for (int prev = indx - 1; prev >= -1; prev--) {
-                int notTake = after[prev+1];
-                int take = INT_MIN;
-                if (prev == -1 || nums[indx] > nums[prev])
-                    take = 1 + after[indx + 1];
+        // vector<int>after(n + 1, 0);
+        // vector<int>curr(n + 1, 0);
+        // for (int indx = n-1; indx >= 0; indx--) {
+        //     for (int prev = indx - 1; prev >= -1; prev--) {
+        //         int notTake = after[prev+1];
+        //         int take = INT_MIN;
+        //         if (prev == -1 || nums[indx] > nums[prev])
+        //             take = 1 + after[indx + 1];
                 
-                curr[prev +1] = max(notTake, take);
+        //         curr[prev +1] = max(notTake, take);
+        //     }
+        //     after = curr;
+        // }
+        // return curr[0];
+
+        // 1 D optimization code
+        vector<int>dp(n, 1);
+        int maxi = 1;
+        for (int i = 0; i < n; i++) {
+            for (int prev = 0; prev < i; prev++) {
+                if (nums[i] > nums[prev]) {
+                    dp[i] = max(1 + dp[prev], dp[i]);
+                }
             }
-            after = curr;
+            maxi = max(dp[i], maxi);
         }
-        
-        return curr[0];
+        return maxi;
     }
 };
