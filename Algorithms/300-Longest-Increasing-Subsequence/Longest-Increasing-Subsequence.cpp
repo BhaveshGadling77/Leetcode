@@ -51,16 +51,35 @@ public:
         // return curr[0];
 
         // 1 D optimization code
-        vector<int>dp(n, 1);
+        // vector<int>dp(n, 1);
+        // int maxi = 1;
+        // for (int i = 0; i < n; i++) {
+        //     for (int prev = 0; prev < i; prev++) {
+        //         if (nums[i] > nums[prev]) {
+        //             dp[i] = max(1 + dp[prev], dp[i]);
+        //         }
+        //     }
+        //     maxi = max(dp[i], maxi);
+        // }
+        // return maxi;
+    
+        // using Binary Search.
+        
+        vector<int>temp;
         int maxi = 1;
+
         for (int i = 0; i < n; i++) {
-            for (int prev = 0; prev < i; prev++) {
-                if (nums[i] > nums[prev]) {
-                    dp[i] = max(1 + dp[prev], dp[i]);
-                }
+            if (temp.empty() || temp.back() < nums[i]) {
+                temp.push_back(nums[i]);
+            } else {
+                auto it = lower_bound(temp.begin(), temp.end(), nums[i]);
+                int indx = it - temp.begin();
+                // cout << indx << endl;
+                temp[indx] = nums[i];
             }
-            maxi = max(dp[i], maxi);
+        
         }
-        return maxi;
+
+        return temp.size();
     }
 };
