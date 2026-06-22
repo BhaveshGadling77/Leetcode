@@ -66,11 +66,12 @@ public:
         // using Binary Search.
         
         vector<int>temp;
-        int maxi = 1;
-
+        int len = 0;
+        
         for (int i = 0; i < n; i++) {
             if (temp.empty() || temp.back() < nums[i]) {
                 temp.push_back(nums[i]);
+                len++;
             } else {
                 auto it = lower_bound(temp.begin(), temp.end(), nums[i]);
                 int indx = it - temp.begin();
@@ -80,6 +81,6 @@ public:
         
         }
 
-        return temp.size();
+        return len;
     }
 };
