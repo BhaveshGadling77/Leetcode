@@ -31,8 +31,7 @@ public:
         }
         
 
-        for (auto it: temp)
-            cout << it << " ";
+        
         return temp;
     }
 };
