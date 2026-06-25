@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // recursion
     // int helper(int i, int j, vector<int>&cuts) {
     //     if (i > j)
     //         return 0;
@@ -14,6 +15,7 @@ public:
     //     return mini;
     // }
 
+    //memoization
     int helper(int i, int j, vector<int>&cuts, vector<vector<int>>&dp) {
         if (i > j)
             return 0;
@@ -36,8 +38,26 @@ public:
         // return helper(1, cuts.size() -2, cuts); //recursion
         
         //memoization
+        // int c = cuts.size();
+        // vector<vector<int>>dp(c-1, vector<int>(c-1 , INT_MAX));
+        // return helper(1, cuts.size() - 2, cuts, dp);
+
+        //tabulation
         int c = cuts.size();
-        vector<vector<int>>dp(c-1, vector<int>(c-1 , INT_MAX));
-        return helper(1, cuts.size() - 2, cuts, dp);
+        vector<vector<int>>dp(c-1, vector<int>(c-1 , 0));
+        
+        for (int i = c-2 ; i >= 1; i--) {
+            for (int j = 1; j <= c-2; j++) {
+                long long mini = INT_MAX;
+                for (int ind = i; ind <= j; ind++) {
+                    long long cost = cuts[j+1] - cuts[i-1] 
+                                + helper(i, ind-1, cuts, dp)
+                                + helper(ind + 1, j, cuts, dp);
+                    mini = min(mini, cost);
+                }
+                dp[i][j] = mini;
+            }
+        }
+        return dp[1][c-2];
     }
 };
