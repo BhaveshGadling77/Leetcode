@@ -56,7 +56,26 @@ public:
         // return helper(0, s); //recursion
 
         //memoization
-        vector<int>dp(s.size() + 1, -1);
-        return helper(0, s, dp);
+        // vector<int>dp(s.size() + 1, -1);
+        // return helper(0, s, dp);
+
+        //tabulation
+        int n = s.size();
+        vector<int>dp(n + 1, -1);
+
+        for (int i = n-1; i >= 0; i--) {
+            int minCost = INT_MAX;
+            string temp = "";
+            for (int j = i; j < s.size(); j++) {
+                temp += s[j];
+                int cost = INT_MAX;
+                if (isPalindrome(temp)) {
+                    cost = 1 + dp[j + 1];
+                    minCost = min(cost, minCost);
+                }
+            }
+            dp[i] = minCost;
+        }
+        return dp[0];
     }
 };
