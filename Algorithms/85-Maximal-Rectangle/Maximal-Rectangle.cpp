@@ -1,25 +1,23 @@
 class Solution {
 public:
-    int largeRect(vector<int>& height) {
+    int largeRect(vector<int>& histo) {
         stack<int>st;
-        int n = height.size();
+        int n = histo.size();
         int maxArea = 0;
-        for (int i = 0; i < n; i++) {
-            while (!st.empty() && height[st.top()] > height[i]) {
-                int element = st.top();
+
+        for (int i = 0; i <= n; i++) {
+            while(!st.empty() && (i == n || histo[st.top()] >= histo[i])) {
+                int height = histo[st.top()];
                 st.pop();
-                int nse = i;
-                int pse = st.empty() ? -1 : st.top();
-                maxArea = max(height[element] * (nse - pse-1), maxArea);
+                int width;
+                if (st.empty()) {
+                    width = i;
+                } else {
+                    width = i - st.top() - 1;
+                }
+                maxArea = max(maxArea, width * height);
             }
             st.push(i);
-        }
-        while (!st.empty()) {
-            int nse = n;
-            int el = st.top();
-            st.pop();
-            int pse = st.empty() ? -1 : st.top();
-            maxArea = max(maxArea, height[el] * (nse - pse - 1));
         }
         return maxArea;
     }
