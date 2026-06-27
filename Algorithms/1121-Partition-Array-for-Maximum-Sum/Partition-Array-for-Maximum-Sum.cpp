@@ -40,7 +40,23 @@ public:
 
 
         //memoization
-        vector<int>dp(n, -1);
-        return helper(0, k, arr, dp);
+        // vector<int>dp(n, -1);
+        // return helper(0, k, arr, dp);
+
+        // tabulation
+        vector<int>dp(n+1, 0);
+
+        for (int indx = n - 1; indx >= 0; indx--) {
+            int maxi = INT_MIN, len = 0, maxsum = 0;
+            int n = arr.size();
+            for (int i = indx; i < min(n, indx + k); i++) {
+                len++;
+                maxi = max(maxi, arr[i]);
+                int sum = len * maxi + dp[i + 1];
+                maxsum = max(maxsum, sum);
+            }
+            dp[indx] = maxsum;
+        }
+        return dp[0];
     }
 };
