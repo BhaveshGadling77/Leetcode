@@ -1,32 +1,26 @@
 class Solution {
 public:
-    int dfs(vector<int>& freq) {
-        int count = 0;
-
-        for (int i = 0; i < 26; i++) {
-            if (freq[i] == 0) continue;
-
-            // choose
-            count++; 
-            freq[i]--;
-
-            // explore
-            count += dfs(freq);
-
-            // backtrack
-            freq[i]++;
+    int dfs(string s, vector<int>&mpp) {
+        int cnt = 0;
+        for (int i = 0; i < mpp.size(); i++) {
+            if (mpp[i] == 0) {
+                continue;
+            }
+            
+            mpp[i]--;
+            char ch = i + 'A';
+            cnt++;
+            cnt += dfs(s + ch, mpp);
+            mpp[i]++;
         }
-
-        return count;
+        return cnt;
     }
-
     int numTilePossibilities(string tiles) {
-        vector<int> freq(26, 0);
-
-        for (char c : tiles) {
-            freq[c - 'A']++;
+        
+        vector<int>mpp(26, 0);
+        for (char ch:tiles) {
+            mpp[ch - 'A']++;
         }
-
-        return dfs(freq);
+        return dfs("", mpp);
     }
 };
