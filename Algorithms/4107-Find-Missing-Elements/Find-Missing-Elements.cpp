@@ -13,7 +13,7 @@ public:
         }
 
         
-        for (int i = mini; i <= maxi; i++) {
+        for (int i = mini + 1; i <= maxi-1; i++) {
             if (mpp.find(i) == mpp.end())
                 ans.push_back(i);
         }
