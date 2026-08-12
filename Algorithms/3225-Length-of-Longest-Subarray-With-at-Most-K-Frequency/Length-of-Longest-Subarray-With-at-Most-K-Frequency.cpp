@@ -15,9 +15,12 @@ public:
                     mpp[nums[l]]--;
                     l++;
                 }
+                mpp[nums[r]]--;
+            } else {
+
+            maxi = max(r - l + 1, maxi);
+            r++;
             }
-                maxi = max(r - l + 1, maxi);
-                r++;
         }
         return maxi;
     }
