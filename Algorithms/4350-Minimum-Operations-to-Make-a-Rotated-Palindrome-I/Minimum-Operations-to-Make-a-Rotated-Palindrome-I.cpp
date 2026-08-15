@@ -22,22 +22,7 @@ public:
             ans = min(ans, cnt);
             rotate(s.begin(), s.begin() + 1, s.end());
         }
-        int l = 0;
-            int r = n - 1;
-            int cnt = 0;
-            while (l < r) {
-                if (s[l] == s[r]) {
-                    l++;
-                    r--;
-                    continue;
-                }
-                int ops = abs(s[l] - s[r]);
-
-                cnt += min(ops, 26-ops);
-                l++;
-                r--;
-            }
-            ans = min(ans, cnt);
+        
         return ans;
     }
 };
