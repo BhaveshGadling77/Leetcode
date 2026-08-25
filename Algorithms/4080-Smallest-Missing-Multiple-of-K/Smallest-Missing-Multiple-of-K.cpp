@@ -2,7 +2,7 @@ class Solution {
 public:
     int missingMultiple(vector<int>& nums, int k) {
         int len = nums.size();
-        map<int, int> mpp;
+        unordered_map<int, int> mpp;
         for (int i = 0; i < len; i++) {
             mpp[nums[i]]++;
         }
