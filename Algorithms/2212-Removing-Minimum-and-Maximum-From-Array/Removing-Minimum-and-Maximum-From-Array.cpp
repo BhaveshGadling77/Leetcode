@@ -17,8 +17,6 @@ public:
                 maxIndx = i;
             }
         }
-        cout << maxi << " " << mini << endl;
-        cout << minIndx << " " << maxIndx << " " << n;
         int ans = 0;
         if (minIndx <= n / 2 && maxIndx <= n / 2) {
             ans = max(minIndx + 1, maxIndx + 1);
