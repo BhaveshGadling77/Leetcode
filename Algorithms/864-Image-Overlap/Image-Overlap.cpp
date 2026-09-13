@@ -17,8 +17,7 @@ public:
         }
         
         int best = 0;
-
-            map<pair<int, int>, int> mpp;
+        map<pair<int, int>, int> mpp;
         for (auto &a : A) {
 
             for (auto &b : B) {
