@@ -1,7 +1,5 @@
 class Solution {
 public:
-    
-
     int minBishopMoves(vector<int>& source, vector<int>& target) {
         int sr = source[0];
         int sc = source[1];
@@ -11,12 +9,12 @@ public:
 
         if (((sr + sc) % 2) == (dr + dc) % 2) {
 
-        
             if (abs(sr - dr) == abs(sc - dc)) {
                 return 1;
             } else {
                 return 2;
             }
+
         } else {
             return -1;
         }
